@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <title>Klima {{ displayname }}</title>
+    <link rel="stylesheet" href="../assets/style.css">
+  </head>
+  <body>
+    <header>
+      <a href="../" class="backlink">Zurück zur Übersicht</a>
+    </header>
+    <h1>Klima {{ displayname }}</h1>
+    <p>
+      Länge: {{ station.lat | round(3) }}°<br>
+      Breite: {{ station.lon | round(3) }}°<br>
+      Seehöhe: {{ station.altitude | int }}m<br>
+      Zeitraum: 1993-2022<br>
+      GeoSphere Klima-ID: {{ station.id }}
+    </p>
+    <h2>Klimadiagramm</h2>
+    <p>
+      Klimadiagramm nach Walter/Lieth. Die monatliche Durchschnittstemperatur und der
+      Gesamtniederschlag sind im Verhältnis 1°C zu 2mm in einem Diagramm vereint.
+      <img src="chart_climate.svg" alt="Klimadiagramm {{ displayname }}">
+    </p>
+    <h2>Lufttemperatur</h2>
+    <p>
+      Monatliche Durchschnittstemperatur der Luft, gemessen in 2m Höhe vom Boden.
+      <img src="chart_temp.svg" alt="Lufttemperatur {{ displayname }}">
+      <table class="definitions">
+        <tr>
+          <th>t</th>
+          <td>Durchschnittstemperatur</td>
+        </tr>
+        <tr>
+          <th>tmax</th>
+          <td>Maximaltemperatur im gesamten Beobachtungszeitraum</td>
+        </tr>
+        <tr>
+          <th>tmin</th>
+          <td>Minimaltemperatur im gesamten Beobachtungszeitraum</td>
+        </tr>
+        <tr>
+          <th>mtmax</th>
+          <td>Durchschnitt der Maximaltemperaturen</td>
+        </tr>
+        <tr>
+          <th>mtmin</th>
+          <td>Durchschnitt der Minimaltemperaturen</td>
+        </tr>
+      </table>
+    </p>
+    <h2>Temperaturhäufigkeit</h2>
+    <p>
+      Temperaturhäufigkeit in Tagen pro Jahr. Kann zum Beispiel dazu benutzt werden um zu beurteilen
+      wie oft eine Anlage unter einem bestimmten Wirkungsgrad arbeitet.
+      <img src="chart_temp_freq.svg" alt="Temperaturhäufigkeit {{ displayname }}">
+      <table class="definitions">
+        <tr>
+          <th>tmin</th>
+          <td>Häufigkeit der Minimaltemperatur</td>
+        </tr>
+        <tr>
+          <th>tmax</th>
+          <td>Häufigkeit der Maximaltemperatur</td>
+        </tr>
+      </table>
+    </p>
+    <h2>Heiztage</h2>
+    <p>
+      Heiztage und Heizgradtage pro Monat. Heiztage sind definiert als Tage mit einer
+      Durchschnittstemperatur unter 12°C. Heizgradtage sind die Summe der Temperaturdifferenzen
+      zwischen Außentemperatur und 20°C an Heiztagen.
+      <img src="chart_heatingdays.svg" alt="Heiztage {{ displayname }}">
+      <table class="definitions">
+        <tr>
+          <th>ht</th>
+          <td>Heiztage</td>
+        </tr>
+        <tr>
+          <th>gradt</th>
+          <td>Heizgradtage</td>
+        </tr>
+      </table>
+    </p>
+    <h2>Luftfeuchtigkeit</h2>
+    <p>
+      Luftfeuchtigkeit Monatsmittel.
+      <img src="chart_humid.svg" alt="Luftfeuchtigkeit {{ displayname }}">
+      <table class="definitions">
+        <tr>
+          <th>rel</th>
+          <td>Relative Luftfeuchtigkeit</td>
+        </tr>
+        <tr>
+          <th>rel7</th>
+          <td>Relative Luftfeuchtigkeit gemessen um 7:00</td>
+        </tr>
+        <tr>
+          <th>rel14</th>
+          <td>Relative Luftfeuchtigkeit gemessen um 14:00</td>
+        </tr>
+        <tr>
+          <th>equiv20</th>
+          <td>Relative Luftfeuchtigkeit der Außenluft bei einer Zimmertemperatur von 20°C</td>
+        </tr>
+      </table>
+    </p>
+    <h2>Sonneneinstrahlung</h2>
+    <p>
+      Sonnenstunden und Globalstrahlung pro Monat.
+      {% if has_sun %}
+      <img src="chart_sun.svg" alt="Sonnentage {{ displayname }}">
+      <table class="definitions">
+        <tr>
+          <th>s</th>
+          <td>Sonnenstunden pro Monat</td>
+        </tr>
+        <tr>
+          <th>global</th>
+          <td>Gesamtmenge an Sonnenenergie</td>
+        </tr>
+      </table>
+      {% else %}
+      <br><br>Keine Daten vorhanden.
+      {% endif %}
+    </p>
+    <h2>Niederschlag</h2>
+    <p>
+      Summe Gesamt- und fester Niederschläge.
+      {% if has_precip %}
+      <img src="chart_precip.svg" alt="Niederschlag {{ displayname }}">
+      <table class="definitions">
+        <tr>
+          <th>rsum</th>
+          <td>Summe aller Niederschlagsarten</td>
+        </tr>
+        <tr>
+          <th>festrr</th>
+          <td>Summe der festen Niederschläge (Schnee, Graupel, Hagel)</td>
+        </tr>
+      </table>
+      {% else %}
+      <br><br>Keine Daten vorhanden.
+      {% endif %}
+    </p>
+    <h2>Temperaturverlauf 2022</h2>
+    <p>
+      Temperaturverlauf für das Jahr 2022 mit jedem Tag als einzelnen Datenpunkt. Klimatologisch
+      nicht sehr relevant, aber ich fand es interessant.
+      {% if has_daily %}
+      <img src="chart_temp_daily.svg" alt="Tagestemperatur {{ displayname }}">
+      <table class="definitions">
+        <tr>
+          <th>t</th>
+          <td>Durchschnittstemperatur</td>
+        </tr>
+        <tr>
+          <th>tmax</th>
+          <td>Maximaltemperatur</td>
+        </tr>
+        <tr>
+          <th>tmin</th>
+          <td>Minimaltemperatur</td>
+        </tr>
+      </table>
+      {% else %}
+      <br><br>Keine Daten vorhanden.
+      {% endif %}
+    </p>
+    <h2>Datenquelle</h2>
+    <p>
+      Datensätze der GeoSphere Austria:
+      <a href="https://data.hub.zamg.ac.at/dataset/klima-v1-1m">Messstationen Monatsdaten</a> und
+      <a href="https://data.hub.zamg.ac.at/dataset/klima-v1-1d">Messstationen Stundendaten</a><br>
+      Verwendet unter CC-BY.<br>
+      Die Diagramme wurden erstellt von mir (Gabriel Huber) und sind nach den Bedingungen der
+      <a href="https://creativecommons.org/licenses/by/4.0/deed.de">CC-BY</a> frei verwendbar.
+      Bitte die Informationen und Hinweise auf der <a href="../">Übersichtsseite</a> beachten!
+    </p>
+  </body>
+</html>

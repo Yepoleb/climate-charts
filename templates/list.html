@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <title>Klimadiagramme Österreich - Übersicht</title>
+    <link rel="stylesheet" href="assets/style.css">
+  </head>
+  <body>
+    <h1>Klimadiagramme Österreich - Übersicht</h1>
+    <p>
+      Diese Seite bietet eine Übersicht über das Klima in Österreich indem sie die Messwerte einer
+      großen Auswahl an Wetterstationen auswertet und grafisch Darstellt. Zur Verfügung stehen alle
+      Orte, für die die GeoSphere Austria (ehem. ZAMG) tagesaktuelle Messdaten veröffentlicht.
+      Zeitraum der Auswertung ist 1993-2022.
+    </p>
+    <p>
+      Besonderer Fokus wurde auf Darstellung von Kennwerten, die für die Dimensionierung von
+      Heizungs- und Solaranlagen relevant sind, gelegt, denn das war mein persönlicher Anstoß für
+      das Projekt. Eine große Inspiration war die
+      <a href="https://www.zamg.ac.at/fix/klima/oe71-00/klima2000/klimadaten_oesterreich_1971_frame1.htm">
+      Klimadaten Zusammenstellung für die Jahre 1971 - 2000</a> des ZAMG, die deutlich mehr Werte
+      betrachtet, aber schon etwas veraltet ist.
+      Für Nachfragen, Korrekturen und Anregungen kann man mich unter den auf
+      <a href="https://gabrielhuber.at/">meiner Homepage</a> angegebenen Kontaktmöglichkeiten
+      kontaktieren.
+    </p>
+    <p>
+      Die hier präsentierten Diagramme wurden von mir in meiner Freizeit erstellt. Ich bin kein
+      Meteorologe, für Korrektheit kann ich nicht garantieren. Wer verlässliche Auswertungen für den
+      kommerziellen Gebrauch benötigt, kann diese bei der GeoSphere Austria in Auftrag geben.
+    </p>
+    <h2>Verfügbare Wetterstationen</h2>
+    {% for state in states %}
+      <h3>{{ state }}</h3>
+      <ul>
+      {% for station in stations_index[state] %}
+        <li><a href="{{ station.slug }}">{{ station.displayname }}</a></li>
+      {% endfor %}
+      </ul>
+    {% endfor %}
+  </body>
+</html>

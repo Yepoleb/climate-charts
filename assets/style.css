@@ -1,0 +1,30 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  margin: 0 1em;
+}
+img {
+  display: block;
+}
+p {
+  max-width: 800px;
+}
+.definitions th {
+  text-align: left;
+}
+.definitions {
+  background: #f0f0f0;
+  padding: 1em;
+  margin-left: 2em;
+}
+.backlink {
+  padding: 1em;
+  box-sizing: border-box;
+  display: inline-block;
+  background: #f0f0f0;
+  text-decoration: none;
+  margin: 0.5em 0;
+  border-radius: 3px;
+}
