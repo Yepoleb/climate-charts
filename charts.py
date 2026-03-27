@@ -181,6 +181,11 @@ class Chart:
             short_empty_elements=True
         )
 
+    def tostring(self, pretty=False):
+        if pretty:
+            etree.indent(self.svg_root)
+        return etree.tostring(self.svg_root, encoding="unicode", xml_declaration=True)
+
     def add_background(self):
         self.add_rect(
             x=0, y=0,

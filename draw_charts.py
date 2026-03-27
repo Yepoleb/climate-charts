@@ -339,19 +339,19 @@ def draw_temp_freq(data_path, chart_path):
 def draw_heatingdays(data_path, chart_path):
     chart_style = {
         "draw-area": {
-            "margin-right": 140
+            "margin-right": 150
         },
         "label-left": {
-            "fill": "#C32B00"
+            "fill": "#00C314"
         },
         "unit-left": {
-            "fill": "#C32B00"
+            "fill": "#00C314"
         },
         "label-right": {
-            "fill": "#00C314"
+            "fill": "#0023C3"
         },
         "unit-right": {
-            "fill": "#00C314"
+            "fill": "#0023C3"
         },
         "legend-line": {
             "margin": 70,  # virtual
